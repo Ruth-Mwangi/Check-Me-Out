@@ -14,7 +14,7 @@
         android:scaleType="matrix"
         app:srcCompat="@color/design_default_color_secondary_variant" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -24,11 +24,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:background="#FFFFFF"
+            android:background="@android:color/background_light"
             android:minHeight="?attr/actionBarSize"
             app:title="@string/app_name"
-            app:titleTextColor="@color/design_default_color_on_secondary" />
-    </LinearLayout>
+            app:titleTextColor="@color/design_default_color_secondary_variant" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="196dp"
+            android:fontFamily="@font/rock_salt"
+            android:text="Welcome To"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/rock_salt"
+            android:text="CheckMeOut"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"

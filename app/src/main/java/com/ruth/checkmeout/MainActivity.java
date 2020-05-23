@@ -1,5 +1,6 @@
 package com.ruth.checkmeout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -8,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -30,6 +32,27 @@ public class MainActivity extends AppCompatActivity {
         dl.addDrawerListener(t);
         t.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        nv=(NavigationView) findViewById(R.id.navigation);
+        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id=item.getItemId();
+                switch (id){
+                    case R.id.about:
+                        Toast.makeText(MainActivity.this, "About",Toast.LENGTH_SHORT).show();break;
+                    case R.id.expenses:
+                        Toast.makeText(MainActivity.this, "Expenses",Toast.LENGTH_SHORT).show();break;
+                    case R.id.shop:
+                        Toast.makeText(MainActivity.this, "Shop",Toast.LENGTH_SHORT).show();break;
+
+                    case R.id.account:
+                        Toast.makeText(MainActivity.this, "My Account",Toast.LENGTH_SHORT).show();break;
+                    default:
+                        return true;
+                }
+                return true;
+            }
+        });
 
     }
     @Override
