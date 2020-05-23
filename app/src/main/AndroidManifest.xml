@@ -19,6 +19,7 @@
         <activity android:name=".LogIn" >
         </activity>
         <activity android:name=".SignUp" />
+        <activity android:name=".MyAccount" />
 
         <meta-data
             android:name="preloaded_fonts"

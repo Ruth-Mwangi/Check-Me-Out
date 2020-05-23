@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         //dl=(DrawerLayout)findViewById(R.id.activity_main);
         //signIn=(TextView)findViewById(R.id.signInLink);
+
         t=new ActionBarDrawerToggle(this,dl,R.string.Open,R.string.Close);
         t.setDrawerIndicatorEnabled(true);
         dl.addDrawerListener(t);
@@ -55,8 +56,11 @@ public class MainActivity extends AppCompatActivity {
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent loginIntent=getIntent();
                 int id=item.getItemId();
                 switch (id){
+                    case R.id.home:
+                        Toast.makeText(MainActivity.this, "Home",Toast.LENGTH_SHORT).show();break;
                     case R.id.about:
                         Toast.makeText(MainActivity.this, "About",Toast.LENGTH_SHORT).show();break;
                     case R.id.expenses:
@@ -65,7 +69,11 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Shop",Toast.LENGTH_SHORT).show();break;
 
                     case R.id.account:
-                        Toast.makeText(MainActivity.this, "My Account",Toast.LENGTH_SHORT).show();break;
+                        Toast.makeText(MainActivity.this, "My Account",Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(MainActivity.this,MyAccount.class);
+                        intent.putExtra("name",loginIntent.getStringExtra("name"));
+                        intent.putExtra("email",loginIntent.getStringExtra("email"));
+                        startActivity(intent);break;
                     default:
                         return true;
                 }

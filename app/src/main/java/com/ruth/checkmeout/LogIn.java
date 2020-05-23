@@ -99,12 +99,12 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
             startActivity(intent);
         }
         else if(v==logInButton){
-            Intent intent=new Intent(LogIn.this,MainActivity.class);
-            startActivity(intent);
             Intent signUpIntent=getIntent();
-            Intent myAccountIntent=new Intent(LogIn.this,MyAccount.class);
-            myAccountIntent.putExtra("name",signUpIntent.getStringExtra("name"));
-            myAccountIntent.putExtra("email",signUpIntent.getStringExtra("email"));
+            Intent intent=new Intent(LogIn.this,MainActivity.class);
+            intent.putExtra("name",signUpIntent.getStringExtra("name"));
+            intent.putExtra("email",signUpIntent.getStringExtra("email"));
+            startActivity(intent);
+
 
 
         }
