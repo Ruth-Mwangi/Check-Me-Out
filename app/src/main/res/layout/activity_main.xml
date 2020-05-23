@@ -53,21 +53,6 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/signInLink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:clickable="true"
-            android:fontFamily="@font/rock_salt"
-            android:text="Sign In"
-            android:textColor="#FFFFFF"
-            android:textColorLink="#009688"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView

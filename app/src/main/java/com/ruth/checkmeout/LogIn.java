@@ -33,6 +33,7 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.logInButton) Button logInButton;
     @BindView(R.id.logInEmail) EditText logInEmail;
     @BindView(R.id.logInPassword) EditText logInPassword;
+    //@BindView(R.id.profileHeadName) TextView profileHeadName;
 
 
     @Override
@@ -53,6 +54,7 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
         Intent intent=getIntent();
         logInEmail.setText(intent.getStringExtra("email"));
         logInPassword.setText(intent.getStringExtra("password"));
+        //profileHeadName.setText(intent.getStringExtra("name"));
 
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

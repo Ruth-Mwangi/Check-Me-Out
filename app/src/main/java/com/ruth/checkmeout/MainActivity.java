@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.activity_main)DrawerLayout dl;
     @BindView(R.id.navigation) NavigationView nv;
-    @BindView(R.id.signInLink) TextView signIn;
+    //@BindView(R.id.signInLink) TextView signIn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //nv=(NavigationView) findViewById(R.id.navigation);
-        signIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,LogIn.class);
-                startActivity(intent);
-            }
-        });
+
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -74,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("name",loginIntent.getStringExtra("name"));
                         intent.putExtra("email",loginIntent.getStringExtra("email"));
                         startActivity(intent);break;
+                    case R.id.signInLink:
+                        Intent signInIntent=new Intent(MainActivity.this,LogIn.class);
+                        startActivity(signInIntent);
+
                     default:
                         return true;
                 }
