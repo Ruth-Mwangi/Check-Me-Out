@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         t.setDrawerIndicatorEnabled(true);
         dl.addDrawerListener(t);
         t.syncState();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //nv=(NavigationView) findViewById(R.id.navigation);
         signIn.setOnClickListener(new View.OnClickListener() {

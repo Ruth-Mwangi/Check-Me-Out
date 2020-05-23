@@ -1,11 +1,11 @@
 package com.ruth.checkmeout;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,19 +21,25 @@ import com.google.android.material.navigation.NavigationView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LogIn extends AppCompatActivity {
-    private Context context;
+public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private ActionBarDrawerToggle t;
-
-    @BindView(R.id.activity_main) DrawerLayout dl;
-    @BindView(R.id.navigation) NavigationView nv;
-    @BindView(R.id.link_signup)
-    TextView link_signup;
+    @BindView(R.id.activity_main)
+    DrawerLayout dl;
+    @BindView(R.id.navigation)
+    NavigationView nv;
+    @BindView(R.id.signUpEmail)
+    EditText signUpEmail;
+    @BindView(R.id.signUpName)
+    EditText signUpName;
+    @BindView(R.id.signUpPassword)
+    EditText signUpPassword;
+    @BindView(R.id.signUpbutton)
+    Button signUpButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_up);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         ButterKnife.bind(this);
         t=new ActionBarDrawerToggle(this,dl,R.string.Open,R.string.Close);
@@ -42,14 +48,6 @@ public class LogIn extends AppCompatActivity {
         t.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //signup
-        link_signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(LogIn.this,SignUp.class);
-                startActivity(intent);
-            }
-        });
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -57,17 +55,17 @@ public class LogIn extends AppCompatActivity {
                 switch (id){
 
                     case R.id.about:
-                        Toast.makeText(LogIn.this, "About",Toast.LENGTH_SHORT).show();break;
+                        Toast.makeText(SignUp.this, "About",Toast.LENGTH_SHORT).show();break;
                     case R.id.expenses:
-                        Toast.makeText(LogIn.this, "Expenses",Toast.LENGTH_SHORT).show();break;
+                        Toast.makeText(SignUp.this, "Expenses",Toast.LENGTH_SHORT).show();break;
                     case R.id.shop:
-                        Toast.makeText(LogIn.this, "Shop",Toast.LENGTH_SHORT).show();break;
+                        Toast.makeText(SignUp.this, "Shop",Toast.LENGTH_SHORT).show();break;
 
                     case R.id.account:
-                        Toast.makeText(LogIn.this, "My Account",Toast.LENGTH_SHORT).show();break;
+                        Toast.makeText(SignUp.this, "My Account",Toast.LENGTH_SHORT).show();break;
 
                     case  R.id.home:
-                        Toast.makeText(LogIn.this, "Home",Toast.LENGTH_SHORT).show();break;
+                        Toast.makeText(SignUp.this, "Home",Toast.LENGTH_SHORT).show();break;
 
                     default:
                         return true;
@@ -75,6 +73,8 @@ public class LogIn extends AppCompatActivity {
                 return true;
             }
         });
+        signUpButton.setOnClickListener(this);
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -86,5 +86,18 @@ public class LogIn extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        if(v==signUpButton){
+            String name=signUpName.getText().toString();
+            String email=signUpEmail.getText().toString();
+            String password=signUpPassword.getText().toString();
+            Intent intent=new Intent(SignUp.this,LogIn.class);
+            intent.putExtra("email",email);
+
+        }
     }
 }

@@ -17,11 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".LogIn" >
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.ruth.checkmeout.MainActivity">
-
-            </meta-data>
         </activity>
+        <activity android:name=".SignUp" />
 
         <meta-data
             android:name="preloaded_fonts"
