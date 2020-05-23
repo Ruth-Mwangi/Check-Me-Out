@@ -7,32 +7,50 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
-    private DrawerLayout dl;
+
     private ActionBarDrawerToggle t;
-    private NavigationView nv;
+
+    @BindView(R.id.activity_main)DrawerLayout dl;
+    @BindView(R.id.navigation) NavigationView nv;
+    @BindView(R.id.signInLink) TextView signIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        ButterKnife.bind(this);
 
-        dl=(DrawerLayout)findViewById(R.id.activity_main);
+        //dl=(DrawerLayout)findViewById(R.id.activity_main);
+        //signIn=(TextView)findViewById(R.id.signInLink);
         t=new ActionBarDrawerToggle(this,dl,R.string.Open,R.string.Close);
         t.setDrawerIndicatorEnabled(true);
         dl.addDrawerListener(t);
         t.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        nv=(NavigationView) findViewById(R.id.navigation);
+        //nv=(NavigationView) findViewById(R.id.navigation);
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,LogIn.class);
+                startActivity(intent);
+            }
+        });
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
