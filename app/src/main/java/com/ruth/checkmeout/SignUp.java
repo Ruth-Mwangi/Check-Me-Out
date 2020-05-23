@@ -97,6 +97,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             String password=signUpPassword.getText().toString();
             Intent intent=new Intent(SignUp.this,LogIn.class);
             intent.putExtra("email",email);
+            intent.putExtra("password",password);
+            startActivity(intent);
 
         }
     }

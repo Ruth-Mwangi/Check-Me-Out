@@ -25,13 +25,13 @@
             app:titleTextColor="@color/design_default_color_secondary_variant" />
 
         <EditText
-            android:id="@+id/logInName"
+            android:id="@+id/logInEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:ems="10"
             android:hint="Name"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:textSize="18sp" />
 
         <EditText
@@ -44,7 +44,7 @@
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/logInButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"

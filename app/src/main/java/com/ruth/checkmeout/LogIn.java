@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,14 +23,17 @@ import com.google.android.material.navigation.NavigationView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LogIn extends AppCompatActivity {
+public class LogIn extends AppCompatActivity implements View.OnClickListener {
     private Context context;
     private ActionBarDrawerToggle t;
 
     @BindView(R.id.activity_main) DrawerLayout dl;
     @BindView(R.id.navigation) NavigationView nv;
-    @BindView(R.id.link_signup)
-    TextView link_signup;
+    @BindView(R.id.link_signup) TextView link_signup;
+    @BindView(R.id.logInButton) Button logInButton;
+    @BindView(R.id.logInEmail) EditText logInEmail;
+    @BindView(R.id.logInPassword) EditText logInPassword;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,14 +47,13 @@ public class LogIn extends AppCompatActivity {
         t.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //signup
-        link_signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(LogIn.this,SignUp.class);
-                startActivity(intent);
-            }
-        });
+        link_signup.setOnClickListener(this);
+        logInButton.setOnClickListener(this);
+
+        Intent intent=getIntent();
+        logInEmail.setText(intent.getStringExtra("email"));
+        logInPassword.setText(intent.getStringExtra("password"));
+
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -86,5 +90,18 @@ public class LogIn extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v==link_signup){
+            Intent intent=new Intent(LogIn.this,SignUp.class);
+            startActivity(intent);
+        }
+        else if(v==logInButton){
+            Intent intent=new Intent(LogIn.this,MainActivity.class);
+            startActivity(intent);
+
+        }
     }
 }
