@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.fragment.app.Fragment;
 
 import butterknife.BindView;
@@ -20,12 +21,11 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener{
 
     private String[] months=new String[]{"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"};
     private int[] expenses=new int[]{1000,1800,2000,3000,5000,1000,4990,1234,2000,1299,4267,7464};
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.activity_expenses,container,false);
         ButterKnife.bind(this,view);
-        ArrayAdapter adapter=new ExpenseAdapter(view.getContext(),android.R.layout.simple_list_item_1,months,expenses);
+        ExpenseAdapter adapter=new ExpenseAdapter(this.getActivity(),android.R.layout.simple_list_item_1,months,expenses);
         expenseList.setAdapter(adapter);
 
         return view;
