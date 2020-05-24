@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                FragmentManager fm = getSupportFragmentManager();
                 Intent loginIntent=getIntent();
                 int id=item.getItemId();
                 switch (id){
@@ -70,8 +72,11 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("email",loginIntent.getStringExtra("email"));
                         startActivity(intent);break;
                     case R.id.signInLink:
-                        Intent signInIntent=new Intent(MainActivity.this,LogIn.class);
-                        startActivity(signInIntent);
+                        //Intent signInIntent=new Intent(MainActivity.this,LogInFragment.class);
+                        //startActivity(signInIntent);
+                        LogInFragment logInFragment=new LogInFragment();
+
+
 
                     default:
                         return true;
