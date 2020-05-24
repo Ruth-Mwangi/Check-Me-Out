@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     >
 
+
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
@@ -52,7 +54,11 @@
             android:text="CheckMeOut"
             android:textSize="24sp"
             android:textStyle="bold" />
-
+        <FrameLayout
+            android:id="@+id/flContent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView

@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.activity_main)DrawerLayout dl;
     @BindView(R.id.navigation) NavigationView nv;
     //@BindView(R.id.signInLink) TextView signIn;
+    private Class fragmentClass;
+    private Fragment fragment = null;
 
 
     @Override
@@ -52,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                FragmentManager fm = getSupportFragmentManager();
+
+
+
                 Intent loginIntent=getIntent();
                 int id=item.getItemId();
                 switch (id){
@@ -74,13 +80,24 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.signInLink:
                         //Intent signInIntent=new Intent(MainActivity.this,LogInFragment.class);
                         //startActivity(signInIntent);
-                        LogInFragment logInFragment=new LogInFragment();
-
-
+//                       LogInFragment logInFragment=new LogInFragment();
+//                       fragmentTransaction.add(R.id.myFragment,logInFragment);
+//                       fragmentTransaction.commit();
+                        fragmentClass=LogInFragment.class;break;
 
                     default:
                         return true;
                 }
+                try {
+                    fragment = (Fragment) fragmentClass.newInstance();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+                dl.closeDrawers();
+
                 return true;
             }
         });
