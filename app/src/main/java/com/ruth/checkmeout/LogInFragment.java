@@ -2,6 +2,7 @@ package com.ruth.checkmeout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.content.ContentValues.TAG;
 
 public class LogInFragment extends Fragment implements View.OnClickListener {
     private Class fragmentClass;
@@ -62,8 +65,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
             logInPassword.setText(password);
 
         }
-        email=logInEmail.getText().toString();
-        password=logInPassword.getText().toString();
+        //Log.i(TAG, "onCreateView: "+ email);
 
         return view;
     }
@@ -86,11 +88,25 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
 
         }
         else if(v==logInButton){
-            Bundle bundle = this.getArguments();
-            Intent intent=new Intent(getActivity(),MainActivity.class);
-            intent.putExtra("name",name);
-            intent.putExtra("email",email);
-            startActivity(intent);
+            Bundle bundle = new Bundle();
+            email=logInEmail.getText().toString();
+            password=logInPassword.getText().toString();
+
+            bundle.putString("name",email);
+            bundle.putString("email",email);
+            fragmentClass=MyAccountFragment.class;
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+                fragment.setArguments(bundle);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.i(TAG, "onCreateView: "+ email);
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+//            Intent intent=new Intent(getActivity(),MainActivity.class);
+//            startActivity(intent);
 
 
         }

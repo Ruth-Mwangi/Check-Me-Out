@@ -44,11 +44,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
             String name=signUpName.getText().toString();
             String email=signUpEmail.getText().toString();
             String password=signUpPassword.getText().toString();
-            //Intent intent=new Intent(getActivity(),LogInFragment.class);
-            //intent.putExtra("email",email);
-            //intent.putExtra("password",password);
-            //intent.putExtra("name",name);
-            //startActivity(intent);
+
             Bundle bundle=new Bundle();
             bundle.putString("name",name);
             bundle.putString("email",email);

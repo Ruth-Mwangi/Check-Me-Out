@@ -70,11 +70,12 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Shop",Toast.LENGTH_SHORT).show();break;
 
                     case R.id.account:
-                        Toast.makeText(MainActivity.this, "My Account",Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(MainActivity.this,MyAccount.class);
-                        intent.putExtra("name",loginIntent.getStringExtra("name"));
-                        intent.putExtra("email",loginIntent.getStringExtra("email"));
-                        startActivity(intent);break;
+//                        Toast.makeText(MainActivity.this, "My Account",Toast.LENGTH_SHORT).show();
+//                        Intent intent=new Intent(MainActivity.this,MyAccount.class);
+//                        intent.putExtra("name",loginIntent.getStringExtra("name"));
+//                        intent.putExtra("email",loginIntent.getStringExtra("email"));
+                        fragmentClass=MyAccountFragment.class;break;
+//                        startActivity(intent);break;
                     case R.id.signInLink:
 
                         fragmentClass=LogInFragment.class;break;
