@@ -12,11 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SignUpFragment extends Fragment implements View.OnClickListener{
+    private Class fragmentClass;
+    private Fragment fragment = null;
     @BindView(R.id.signUpEmail)
     EditText signUpEmail;
     @BindView(R.id.signUpName)
@@ -41,11 +44,25 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
             String name=signUpName.getText().toString();
             String email=signUpEmail.getText().toString();
             String password=signUpPassword.getText().toString();
-            //Intent intent=new Intent(getActivity(),LogIn.class);
+            //Intent intent=new Intent(getActivity(),LogInFragment.class);
             //intent.putExtra("email",email);
             //intent.putExtra("password",password);
             //intent.putExtra("name",name);
             //startActivity(intent);
+            Bundle bundle=new Bundle();
+            bundle.putString("name",name);
+            bundle.putString("email",email);
+            bundle.putString("password",password);
+            fragmentClass=LogInFragment.class;
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+                fragment.setArguments(bundle);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
         }
 

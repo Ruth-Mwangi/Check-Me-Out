@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-
-
                 Intent loginIntent=getIntent();
                 int id=item.getItemId();
                 switch (id){
@@ -78,11 +76,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("email",loginIntent.getStringExtra("email"));
                         startActivity(intent);break;
                     case R.id.signInLink:
-                        //Intent signInIntent=new Intent(MainActivity.this,LogInFragment.class);
-                        //startActivity(signInIntent);
-//                       LogInFragment logInFragment=new LogInFragment();
-//                       fragmentTransaction.add(R.id.myFragment,logInFragment);
-//                       fragmentTransaction.commit();
+
                         fragmentClass=LogInFragment.class;break;
 
                     default:

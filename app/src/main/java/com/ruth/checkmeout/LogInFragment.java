@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,6 +25,9 @@ import butterknife.ButterKnife;
 public class LogInFragment extends Fragment implements View.OnClickListener {
     private Class fragmentClass;
     private Fragment fragment = null;
+    private String email;
+    private String name;
+    private String password;
     @BindView(R.id.activity_main)
     DrawerLayout dl;
     @BindView(R.id.navigation)
@@ -39,15 +43,28 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.activity_login,container,false);
+        //setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         ButterKnife.bind(this,view);
 
         link_signup.setOnClickListener(this);
         logInButton.setOnClickListener(this);
 
-        Intent intent=getActivity().getIntent();
-        logInEmail.setText(intent.getStringExtra("email"));
-        logInPassword.setText(intent.getStringExtra("password"));
-        //profileHeadName.setText(intent.getStringExtra("name"));
+        //Intent intent=getActivity().getIntent();
+//        logInEmail.setText(intent.getStringExtra("email"));
+//        logInPassword.setText(intent.getStringExtra("password"));
+//        //profileHeadName.setText(intent.getStringExtra("name"));
+        Bundle bundle = this.getArguments();
+        if(bundle!=null){
+            email = bundle.getString("email");
+            name = bundle.getString("name");
+            password = bundle.getString("password");
+            logInEmail.setText(email);
+            logInPassword.setText(password);
+
+        }
+        email=logInEmail.getText().toString();
+        password=logInPassword.getText().toString();
+
         return view;
     }
 
@@ -69,10 +86,10 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
 
         }
         else if(v==logInButton){
-            Intent signUpIntent=getActivity().getIntent();
+            Bundle bundle = this.getArguments();
             Intent intent=new Intent(getActivity(),MainActivity.class);
-            intent.putExtra("name",signUpIntent.getStringExtra("name"));
-            intent.putExtra("email",signUpIntent.getStringExtra("email"));
+            intent.putExtra("name",name);
+            intent.putExtra("email",email);
             startActivity(intent);
 
 
