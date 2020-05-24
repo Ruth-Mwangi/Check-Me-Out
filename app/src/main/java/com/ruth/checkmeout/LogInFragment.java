@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -21,6 +22,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class LogInFragment extends Fragment implements View.OnClickListener {
+    private Class fragmentClass;
+    private Fragment fragment = null;
     @BindView(R.id.activity_main)
     DrawerLayout dl;
     @BindView(R.id.navigation)
@@ -51,8 +54,19 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if(v==link_signup){
-            Intent intent=new Intent(getActivity(),SignUp.class);
-            startActivity(intent);
+//            Intent intent=new Intent(getActivity(),SignUp.class);
+//            startActivity(intent);
+            fragmentClass=SignUpFragment.class;
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+            //dl.closeDrawers();
+
+
         }
         else if(v==logInButton){
             Intent signUpIntent=getActivity().getIntent();
