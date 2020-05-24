@@ -61,23 +61,21 @@ public class MainActivity extends AppCompatActivity {
                 int id=item.getItemId();
                 switch (id){
                     case R.id.home:
-                        Toast.makeText(MainActivity.this, "Home",Toast.LENGTH_SHORT).show();break;
+                        Toast.makeText(MainActivity.this, "Home",Toast.LENGTH_SHORT).show();
+                        break;
                     case R.id.about:
-                        Toast.makeText(MainActivity.this, "About",Toast.LENGTH_SHORT).show();break;
+                        Toast.makeText(MainActivity.this, "About Coming Soon",Toast.LENGTH_SHORT).show();break;
                     case R.id.expenses:
-                        Toast.makeText(MainActivity.this, "Expenses",Toast.LENGTH_SHORT).show();break;
+                        Toast.makeText(MainActivity.this, "Expenses",Toast.LENGTH_SHORT).show();
+                        fragmentClass=ExpensesFragment.class;break;
                     case R.id.shop:
-                        Toast.makeText(MainActivity.this, "Shop",Toast.LENGTH_SHORT).show();break;
+                        Toast.makeText(MainActivity.this, "Shop Coming Soon",Toast.LENGTH_SHORT).show();break;
 
                     case R.id.account:
-//                        Toast.makeText(MainActivity.this, "My Account",Toast.LENGTH_SHORT).show();
-//                        Intent intent=new Intent(MainActivity.this,MyAccount.class);
-//                        intent.putExtra("name",loginIntent.getStringExtra("name"));
-//                        intent.putExtra("email",loginIntent.getStringExtra("email"));
+                        Toast.makeText(MainActivity.this, "My Account",Toast.LENGTH_SHORT).show();
                         fragmentClass=MyAccountFragment.class;break;
-//                        startActivity(intent);break;
                     case R.id.signInLink:
-
+                        Toast.makeText(MainActivity.this, "Log In",Toast.LENGTH_SHORT).show();
                         fragmentClass=LogInFragment.class;break;
 
                     default:
