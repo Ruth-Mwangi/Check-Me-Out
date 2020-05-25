@@ -83,7 +83,6 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
             Bundle bundle = new Bundle();
             email=logInEmail.getText().toString();
             password=logInPassword.getText().toString();
-
             bundle.putString("name",email);
             bundle.putString("email",email);
             fragmentClass=MyAccountFragment.class;

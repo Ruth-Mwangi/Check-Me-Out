@@ -27,7 +27,6 @@ public class MyAccountFragment extends Fragment {
         ButterKnife.bind(this,view);
         Bundle bundle = this.getArguments();
         if(bundle!=null){
-            Log.i(TAG, "onCreateView: "+ bundle.getString("name"));
             profileName.setText(bundle.getString("name"));
             profileEmail.setText(bundle.getString("email"));
 
