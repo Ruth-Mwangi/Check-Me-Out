@@ -46,16 +46,11 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.activity_login,container,false);
-        //setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         ButterKnife.bind(this,view);
 
         link_signup.setOnClickListener(this);
         logInButton.setOnClickListener(this);
 
-        //Intent intent=getActivity().getIntent();
-//        logInEmail.setText(intent.getStringExtra("email"));
-//        logInPassword.setText(intent.getStringExtra("password"));
-//        //profileHeadName.setText(intent.getStringExtra("name"));
         Bundle bundle = this.getArguments();
         if(bundle!=null){
             email = bundle.getString("email");
@@ -73,8 +68,6 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if(v==link_signup){
-//            Intent intent=new Intent(getActivity(),SignUp.class);
-//            startActivity(intent);
             fragmentClass=SignUpFragment.class;
             try {
                 fragment = (Fragment) fragmentClass.newInstance();
@@ -83,7 +76,6 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
             }
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-            //dl.closeDrawers();
 
 
         }
@@ -101,13 +93,8 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Log.i(TAG, "onCreateView: "+ email);
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-
-//            Intent intent=new Intent(getActivity(),MainActivity.class);
-//            startActivity(intent);
-
 
         }
 

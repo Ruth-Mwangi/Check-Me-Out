@@ -25,7 +25,6 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.activity_expenses,container,false);
         ButterKnife.bind(this,view);
-        //ArrayAdapter adapter=new ArrayAdapter(this.getActivity(),android.R.layout.simple_expandable_list_item_1,months);
         ExpenseAdapter adapter1=new ExpenseAdapter(view.getContext(),android.R.layout.simple_list_item_1,months,expenses);
         expenseList.setAdapter(adapter1);
 

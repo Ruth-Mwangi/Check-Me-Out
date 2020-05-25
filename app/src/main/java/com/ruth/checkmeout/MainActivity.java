@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.activity_main)DrawerLayout dl;
     @BindView(R.id.navigation) NavigationView nv;
-    //@BindView(R.id.signInLink) TextView signIn;
     private Class fragmentClass;
     private Fragment fragment = null;
 
@@ -42,54 +41,55 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         ButterKnife.bind(this);
 
-        //dl=(DrawerLayout)findViewById(R.id.activity_main);
-        //signIn=(TextView)findViewById(R.id.signInLink);
-
         t=new ActionBarDrawerToggle(this,dl,R.string.Open,R.string.Close);
         t.setDrawerIndicatorEnabled(true);
         dl.addDrawerListener(t);
         t.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //nv=(NavigationView) findViewById(R.id.navigation);
+
 
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                Intent loginIntent=getIntent();
                 int id=item.getItemId();
-                switch (id){
-                    case R.id.home:
-                        Toast.makeText(MainActivity.this, "Home",Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.about:
-                        Toast.makeText(MainActivity.this, "About Coming Soon",Toast.LENGTH_SHORT).show();break;
-                    case R.id.expenses:
-                        Toast.makeText(MainActivity.this, "Expenses",Toast.LENGTH_SHORT).show();
-                        fragmentClass=ExpensesFragment.class;break;
-                    case R.id.shop:
-                        Toast.makeText(MainActivity.this, "Shop Coming Soon",Toast.LENGTH_SHORT).show();break;
+                if(id==R.id.home||id==R.id.about||id==R.id.shop){
+                    Intent intent=new Intent(getBaseContext(),MainActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(MainActivity.this, "Coming Soon",Toast.LENGTH_SHORT).show();
 
-                    case R.id.account:
-                        Toast.makeText(MainActivity.this, "My Account",Toast.LENGTH_SHORT).show();
-                        fragmentClass=MyAccountFragment.class;break;
-                    case R.id.signInLink:
-                        Toast.makeText(MainActivity.this, "Log In",Toast.LENGTH_SHORT).show();
-                        fragmentClass=LogInFragment.class;break;
-
-                    default:
-                        return true;
                 }
-                try {
-                    fragment = (Fragment) fragmentClass.newInstance();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                else {
+                    switch (id){
 
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+                        case R.id.expenses:
+                            Toast.makeText(MainActivity.this, "Expenses",Toast.LENGTH_SHORT).show();
+                            fragmentClass=ExpensesFragment.class;break;
+
+                        case R.id.account:
+                            Toast.makeText(MainActivity.this, "My Account",Toast.LENGTH_SHORT).show();
+                            fragmentClass=MyAccountFragment.class;break;
+                        case R.id.signInLink:
+                            Toast.makeText(MainActivity.this, "Log In",Toast.LENGTH_SHORT).show();
+                            fragmentClass=LogInFragment.class;break;
+
+                        default:
+                            return true;
+                    }
+                    try {
+                        fragment = (Fragment) fragmentClass.newInstance();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+
+                }
                 dl.closeDrawers();
+
 
                 return true;
             }
