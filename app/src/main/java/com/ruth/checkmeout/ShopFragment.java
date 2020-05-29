@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class ShopFragment extends Fragment {
+public class ShopFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.btnScan)
     FloatingActionButton btnScan;
@@ -26,8 +26,20 @@ public class ShopFragment extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_shop, container, false);
         ButterKnife.bind(this,view);
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+        Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+        btnScan.setOnClickListener(this);
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if(v==btnScan){
+            Snackbar.make(v, "FB clicked", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+
+        }
+
     }
 }
