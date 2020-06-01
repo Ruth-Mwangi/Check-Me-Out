@@ -22,10 +22,10 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActionBarDrawerToggle t;
+    private ActionBarDrawerToggle checkMeOutToggle;
 
-    @BindView(R.id.activity_main)DrawerLayout dl;
-    @BindView(R.id.navigation) NavigationView nv;
+    @BindView(R.id.activity_main)DrawerLayout checkMeOutDrawerLayout;
+    @BindView(R.id.navigation) NavigationView checkMeOutNavigation;
     private Class fragmentClass;
     private Fragment fragment = null;
 
@@ -37,16 +37,16 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         ButterKnife.bind(this);
 
-        t=new ActionBarDrawerToggle(this,dl,R.string.Open,R.string.Close);
-        t.setDrawerIndicatorEnabled(true);
-        dl.addDrawerListener(t);
-        t.syncState();
+        checkMeOutToggle=new ActionBarDrawerToggle(this,checkMeOutDrawerLayout,R.string.Open,R.string.Close);
+        checkMeOutToggle.setDrawerIndicatorEnabled(true);
+        checkMeOutDrawerLayout.addDrawerListener(checkMeOutToggle);
+        checkMeOutToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 
-        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        checkMeOutNavigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 }
-                dl.closeDrawers();
+                checkMeOutDrawerLayout.closeDrawers();
 
 
                 return true;
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         // The action bar home/up action should open or close the drawer.
         switch (item.getItemId()) {
             case android.R.id.home:
-                dl.openDrawer(GravityCompat.START);
+                checkMeOutDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
 

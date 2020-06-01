@@ -55,16 +55,24 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/imgview"
+        <Button
+            android:id="@+id/btnGoToScan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView2" />
+            android:layout_below="@id/textView2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="#FFFFFF"
+            android:fontFamily="@font/bentham"
+            android:text="Start Shopping"
+            android:textColor="#009688"
+            android:textStyle="bold" />
+
         <FrameLayout
             android:id="@+id/flContent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
