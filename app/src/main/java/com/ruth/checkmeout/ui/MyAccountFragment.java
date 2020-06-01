@@ -1,4 +1,4 @@
-package com.ruth.checkmeout;
+package com.ruth.checkmeout.ui;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.ruth.checkmeout.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

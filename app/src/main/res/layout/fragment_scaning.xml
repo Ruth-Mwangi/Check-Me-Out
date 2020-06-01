@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScanningFragment">
+    tools:context=".ui.ScanningFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -21,15 +21,19 @@
         <TextView
             android:id="@+id/txtBarcodeValue"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:fontFamily="@font/bentham"
             android:gravity="center_horizontal"
-            android:text="Scanned code" />
+            android:text="No Barcode  Detected"
+            android:textColor="#009688"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btnGoToCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/txtBarcodeValue"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="start"
             android:background="#FFFFFF"
             android:fontFamily="@font/bentham"

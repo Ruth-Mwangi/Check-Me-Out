@@ -1,6 +1,5 @@
-package com.ruth.checkmeout;
+package com.ruth.checkmeout.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +9,21 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.ruth.checkmeout.R;
+import com.ruth.checkmeout.models.CheckMeOutSearchResponse;
+import com.ruth.checkmeout.networks.CheckMeOutApi;
+import com.ruth.checkmeout.networks.CheckMeOutClient;
+
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignUpFragment extends Fragment implements View.OnClickListener{
     private Class fragmentClass;
@@ -28,6 +36,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     EditText signUpPassword;
     @BindView(R.id.signUpbutton)
     Button signUpButton;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,6 +44,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
 
         ButterKnife.bind(this,view);
         signUpButton.setOnClickListener(this);
+
         return view;
     }
 

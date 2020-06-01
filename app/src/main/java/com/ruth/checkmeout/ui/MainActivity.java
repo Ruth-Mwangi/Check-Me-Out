@@ -1,4 +1,4 @@
-package com.ruth.checkmeout;
+package com.ruth.checkmeout.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -8,25 +8,14 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.SparseArray;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.vision.Frame;
-import com.google.android.gms.vision.barcode.Barcode;
-import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.Objects;
+import com.ruth.checkmeout.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,17 +68,17 @@ public class MainActivity extends AppCompatActivity {
 
                         case R.id.expenses:
                             Toast.makeText(MainActivity.this, "Expenses",Toast.LENGTH_SHORT).show();
-                            fragmentClass=ExpensesFragment.class;break;
+                            fragmentClass= ExpensesFragment.class;break;
 
                         case R.id.account:
                             Toast.makeText(MainActivity.this, "My Account",Toast.LENGTH_SHORT).show();
-                            fragmentClass=MyAccountFragment.class;break;
+                            fragmentClass= MyAccountFragment.class;break;
                         case R.id.signInLink:
                             Toast.makeText(MainActivity.this, "Log In",Toast.LENGTH_SHORT).show();
-                            fragmentClass=LogInFragment.class;break;
+                            fragmentClass= LogInFragment.class;break;
                         case R.id.shop:
                             Toast.makeText(MainActivity.this, "Shop",Toast.LENGTH_SHORT).show();
-                            fragmentClass=ShopFragment.class;break;
+                            fragmentClass= ShopFragment.class;break;
 
 
                         default:

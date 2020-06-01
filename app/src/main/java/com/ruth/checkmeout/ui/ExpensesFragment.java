@@ -1,16 +1,17 @@
-package com.ruth.checkmeout;
+package com.ruth.checkmeout.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.fragment.app.Fragment;
+
+import com.ruth.checkmeout.adapters.ExpenseAdapter;
+import com.ruth.checkmeout.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

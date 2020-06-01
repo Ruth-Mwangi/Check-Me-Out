@@ -1,4 +1,4 @@
-package com.ruth.checkmeout;
+package com.ruth.checkmeout.adapters;
 
 import android.content.Context;
 import android.util.Log;

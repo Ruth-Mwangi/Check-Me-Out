@@ -1,4 +1,4 @@
-package com.ruth.checkmeout;
+package com.ruth.checkmeout.ui;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.util.SparseArray;
@@ -23,6 +24,7 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.android.material.snackbar.Snackbar;
+import com.ruth.checkmeout.R;
 
 import java.io.IOException;
 
@@ -36,11 +38,13 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.surfaceView)
     SurfaceView surfaceView;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
-    CameraSource cameraSource;
+    private CameraSource cameraSource;
     @BindView(R.id.txtBarcodeValue)
     TextView txtBarcodeValue;
     @BindView(R.id.btnGoToCart)
     Button btnGoToCart;
+    private Class fragmentClass;
+    private Fragment fragment = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +61,21 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+        if(v==btnGoToCart){
+            fragmentClass=ShopFragment.class;
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            FragmentManager fragmentManager = getFragmentManager();
+            assert fragmentManager != null;
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+        }
 
     }
     private void initialiseDetectorsAndSources() {

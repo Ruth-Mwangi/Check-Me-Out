@@ -1,51 +1,38 @@
-package com.ruth.checkmeout;
+package com.ruth.checkmeout.ui;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
-import android.util.Log;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.Detector;
-import com.google.android.gms.vision.Frame;
-import com.google.android.gms.vision.barcode.Barcode;
-import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.ruth.checkmeout.R;
+import com.ruth.checkmeout.models.CheckMeOutSearchResponse;
+import com.ruth.checkmeout.networks.CheckMeOutApi;
+import com.ruth.checkmeout.networks.CheckMeOutClient;
 
-import java.io.IOException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static android.content.ContentValues.TAG;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class ShopFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.btnScan)
     FloatingActionButton btnScan;
-//    @BindView(R.id.surfaceView)
-//    SurfaceView surfaceView;
-//    private static final int REQUEST_CAMERA_PERMISSION = 201;
-//    CameraSource cameraSource;
-//    @BindView(R.id.txtBarcodeValue)
-//    TextView txtBarcodeValue;
+    private Class fragmentClass;
+    private Fragment fragment = null;
+    private String code;
+    List<CheckMeOutSearchResponse> items;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +45,28 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         btnScan.setOnClickListener(this);
 
         //initialiseDetectorsAndSources();
+        CheckMeOutApi client= CheckMeOutClient.getItem();
+        Call<CheckMeOutSearchResponse> call=client.getItem(code);
+        call.enqueue(new Callback<CheckMeOutSearchResponse>(){
+
+            @Override
+            public void onResponse(Call<CheckMeOutSearchResponse> call, Response<CheckMeOutSearchResponse> response) {
+
+                if(response.isSuccessful()){
+                    Bundle bundle=new Bundle();
+                    bundle.putInt("id",response.body().getId());
+                    bundle.putInt("price",response.body().getPrice());
+                    bundle.putString("name",response.body().getName());
+                    bundle.putString("code",response.body().getCode());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CheckMeOutSearchResponse> call, Throwable t) {
+
+            }
+        });
         return view;
     }
 
@@ -85,6 +94,16 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
 //            Barcode thisCode = barcodes.valueAt(0);
 //
 //            Toast.makeText(getContext(),thisCode.rawValue,Toast.LENGTH_LONG).show();
+            fragmentClass=ScanningFragment.class;
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
 
         }
