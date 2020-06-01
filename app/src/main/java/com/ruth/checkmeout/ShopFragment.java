@@ -1,24 +1,51 @@
 package com.ruth.checkmeout;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.Detector;
+import com.google.android.gms.vision.Frame;
+import com.google.android.gms.vision.barcode.Barcode;
+import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.content.ContentValues.TAG;
 
 
 public class ShopFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.btnScan)
     FloatingActionButton btnScan;
+    @BindView(R.id.surfaceView)
+    SurfaceView surfaceView;
+    private static final int REQUEST_CAMERA_PERMISSION = 201;
+    CameraSource cameraSource;
+    @BindView(R.id.txtBarcodeValue)
+    TextView txtBarcodeValue;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,6 +56,8 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
         btnScan.setOnClickListener(this);
+
+        initialiseDetectorsAndSources();
         return view;
     }
 
@@ -36,10 +65,125 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         if(v==btnScan){
-            Snackbar.make(v, "FB clicked", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+//            Snackbar.make(v, "FB clicked", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
+//            //ImageView myImageView = (ImageView) findViewById(R.id.imgview);
+//            Bitmap myBitmap = BitmapFactory.decodeResource(
+//                    getContext().getResources(),
+//                    R.drawable.download);
+//            //myImageView.setImageBitmap(myBitmap);
+//            BarcodeDetector detector =
+//                    new BarcodeDetector.Builder(getContext())
+//                            .setBarcodeFormats(Barcode.DATA_MATRIX | Barcode.EAN_13)
+//                            .build();
+//            if(!detector.isOperational()){
+//                Toast.makeText(getContext(),"Could not set up the detector!",Toast.LENGTH_LONG).show();
+//                //return;
+//            }
+//            Frame frame = new Frame.Builder().setBitmap(myBitmap).build();
+//            SparseArray<Barcode> barcodes = detector.detect(frame);
+//            Barcode thisCode = barcodes.valueAt(0);
+//
+//            Toast.makeText(getContext(),thisCode.rawValue,Toast.LENGTH_LONG).show();
+
 
         }
 
     }
+    private void initialiseDetectorsAndSources() {
+
+        Toast.makeText(getContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
+
+        BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(getContext())
+                .setBarcodeFormats(Barcode.ALL_FORMATS)
+                .build();
+
+        cameraSource = new CameraSource.Builder(getContext(), barcodeDetector)
+                .setRequestedPreviewSize(1920, 1080)
+                .setAutoFocusEnabled(true) //you should add this feature
+                .build();
+
+        surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(SurfaceHolder holder) {
+                try {
+                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                        cameraSource.start(surfaceView.getHolder());
+                        Log.i(TAG, "surfaceCreated: bloop");
+                        Toast.makeText(getContext(), "Surface created", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        ActivityCompat.requestPermissions(getActivity(), new
+                                String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+                Log.i(TAG, "surfaceCreated: blipp");
+                Toast.makeText(getContext(), "Surface Changed", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder) {
+                Log.i(TAG, "surfaceCreated: bleep");
+                Toast.makeText(getContext(), "Surface  Destroyed", Toast.LENGTH_SHORT).show();
+                cameraSource.stop();
+            }
+        });
+
+
+        barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
+            @Override
+            public void release() {
+                Log.i(TAG, "surfaceCreated: bluup");
+                Toast.makeText(getContext(), "To prevent memory leaks barcode scanner has been stopped", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void receiveDetections(Detector.Detections<Barcode> detections) {
+                final SparseArray<Barcode> barcodes = detections.getDetectedItems();
+                //Toast.makeText(getContext(), barcodes.valueAt(0).rawValue,Toast.LENGTH_SHORT).show();
+
+                if (barcodes.size() != 0) {
+                    Log.i(TAG, "surfaceCreated:"+barcodes.size());
+//                    Toast.makeText(getContext(), barcodes.valueAt(0).rawValue,Toast.LENGTH_LONG).show();
+
+
+                    txtBarcodeValue.post(new Runnable() {
+
+                        @Override
+                        public void run() {
+
+                            String intentData;
+                            if (barcodes.valueAt(0).email != null) {
+                                txtBarcodeValue.removeCallbacks(null);
+                                intentData = barcodes.valueAt(0).email.address;
+
+                                txtBarcodeValue.setText(intentData);
+                                //isEmail = true;
+                                //btnAction.setText("ADD CONTENT TO THE MAIL");
+                                cameraSource.stop();
+
+                            } else {
+                                //isEmail = false;
+                                //btnAction.setText("LAUNCH URL");
+                                intentData = barcodes.valueAt(0).displayValue;
+                                txtBarcodeValue.setText(intentData);
+
+                            }
+                        }
+                    });
+
+                }
+            }
+        });
+    }
+
 }

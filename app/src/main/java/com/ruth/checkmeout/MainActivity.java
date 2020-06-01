@@ -67,24 +67,9 @@ public class MainActivity extends AppCompatActivity {
 //                    Intent intent=new Intent(getBaseContext(),MainActivity.class);
 //                    startActivity(intent);
                     Toast.makeText(MainActivity.this, "Coming Soon",Toast.LENGTH_SHORT).show();
-                    ImageView myImageView = (ImageView) findViewById(R.id.imgview);
-                    Bitmap myBitmap = BitmapFactory.decodeResource(
-                            getApplicationContext().getResources(),
-                            R.drawable.puppy);
-                    myImageView.setImageBitmap(myBitmap);
-                    BarcodeDetector detector =
-                            new BarcodeDetector.Builder(getApplicationContext())
-                                    .setBarcodeFormats(Barcode.DATA_MATRIX | Barcode.QR_CODE)
-                                    .build();
-                    if(!detector.isOperational()){
-                        Toast.makeText(MainActivity.this,"Could not set up the detector!",Toast.LENGTH_LONG).show();
-                        //return;
-                    }
-                    Frame frame = new Frame.Builder().setBitmap(myBitmap).build();
-                    SparseArray<Barcode> barcodes = detector.detect(frame);
-                    Barcode thisCode = barcodes.valueAt(0);
 
-                    Toast.makeText(MainActivity.this,thisCode.rawValue,Toast.LENGTH_LONG).show();
+
+                    //Toast.makeText(MainActivity.this,thisCode.rawValue,Toast.LENGTH_LONG).show();
                     Intent intent=new Intent(getBaseContext(),MainActivity.class);
                     startActivity(intent);
 
