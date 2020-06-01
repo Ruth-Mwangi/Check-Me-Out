@@ -23,7 +23,7 @@ CheckMeOut is a a supermarket self checkout app that also doubles as a financial
 * type git clone followed by the link you just copied
 * add appropriate dependencies
 * open the file and run the MainActivity.java class
-* Scan image if it is unsuccessful [click here to solve the issue](https://github.com/Ruth-Mwangi)<br />
+* Scan image if it is unsuccessful [click here see Api Documentation](https://github.com/Ruth-Mwangi/Ruth-Mwangi-CheckMeOut-Api)<br />
  ![ScreenShot](https://user-images.githubusercontent.com/22973263/83427164-fabc7500-a438-11ea-8923-b98b2db838c4.jpg )
 
  ![ScreenShot](https://user-images.githubusercontent.com/22973263/83427178-0019bf80-a439-11ea-974b-a6ad1e45c93b.jpg)
@@ -44,7 +44,7 @@ CheckMeOut is a a supermarket self checkout app that also doubles as a financial
  
 ## Apis Used
 * [Mobile vision api](https://developers.google.com/vision/android/barcodes-overview) for the scanning of barcodes.
-* [checkmeout-api](https://checkmeout-api.herokuapp.com/) used to retrieve items using barcodes
+* [checkmeout-api](https://github.com/Ruth-Mwangi/Ruth-Mwangi-CheckMeOut-Api) used to retrieve items using barcodes
 
 
 ## Support and contact details
