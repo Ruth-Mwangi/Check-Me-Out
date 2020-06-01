@@ -27,6 +27,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.ruth.checkmeout.R;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +47,8 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
     Button btnGoToCart;
     private Class fragmentClass;
     private Fragment fragment = null;
+    private String intentData="";
+    private ArrayList<String> itemCodes=new ArrayList<String>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,9 +67,14 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         if(v==btnGoToCart){
+            Log.i(TAG, "onClick: " + itemCodes.size());
+            Bundle bundle=new Bundle();
+            bundle.putStringArrayList("codes",itemCodes);
+
             fragmentClass=ShopFragment.class;
             try {
                 fragment = (Fragment) fragmentClass.newInstance();
+                fragment.setArguments(bundle);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -120,7 +129,7 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
-                Log.i(TAG, "surfaceCreated: bleep");
+//                Log.i(TAG, "surfaceCreated: bleep");
                 Toast.makeText(getContext(), "Surface  Destroyed", Toast.LENGTH_SHORT).show();
                 cameraSource.stop();
             }
@@ -149,12 +158,13 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void run() {
 
-                            String intentData;
+
                             if (barcodes.valueAt(0).email != null) {
                                 txtBarcodeValue.removeCallbacks(null);
                                 intentData = barcodes.valueAt(0).email.address;
 
                                 txtBarcodeValue.setText(intentData);
+
                                 //isEmail = true;
                                 //btnAction.setText("ADD CONTENT TO THE MAIL");
                                 cameraSource.stop();
@@ -163,8 +173,8 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
                                 //isEmail = false;
                                 //btnAction.setText("LAUNCH URL");
                                 intentData = barcodes.valueAt(0).displayValue;
+                                itemCodes.add(intentData);
                                 txtBarcodeValue.setText(intentData);
-
                             }
                         }
                     });

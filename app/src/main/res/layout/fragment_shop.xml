@@ -88,7 +88,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:scrollbars="vertical"
-                android:verticalScrollbarPosition="right"/>
+                android:verticalScrollbarPosition="right" />
 
             <Button
                 android:id="@+id/btnCheckOut"

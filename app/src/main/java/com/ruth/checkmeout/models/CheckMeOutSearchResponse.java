@@ -4,6 +4,10 @@ package com.ruth.checkmeout.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
+
 public class CheckMeOutSearchResponse {
 
     @SerializedName("code")
@@ -57,7 +61,7 @@ public class CheckMeOutSearchResponse {
         this.name = name;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
@@ -65,7 +69,7 @@ public class CheckMeOutSearchResponse {
         this.price = price;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
