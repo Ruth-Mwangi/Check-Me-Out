@@ -12,6 +12,9 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -20,7 +23,7 @@ import com.ruth.checkmeout.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ActionBarDrawerToggle checkMeOutToggle;
 
@@ -29,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private Class fragmentClass;
     private Fragment fragment = null;
 
+    @BindView(R.id.txtGoToScan)
+    TextView txtGoToScan;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         ButterKnife.bind(this);
+        txtGoToScan.setOnClickListener(this);
 
         checkMeOutToggle=new ActionBarDrawerToggle(this,checkMeOutDrawerLayout,R.string.Open,R.string.Close);
         checkMeOutToggle.setDrawerIndicatorEnabled(true);
@@ -113,5 +120,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v==txtGoToScan){
+            fragmentClass=ScanningFragment.class;
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            FragmentManager fragmentManager= getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        }
+
     }
 }

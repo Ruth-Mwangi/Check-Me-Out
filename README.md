@@ -1,9 +1,19 @@
 # CheckMeOut
 
-CheckMeOut is a a supermarket self checkout app that also doubles as a financial tracker.
+CheckMeOut is a a supermarket self checkout app that also doubles as a financial tracker. It allows one to scan goods add them to a cart and Checkout.
 
 ## Author
 - [Ruth Mwangi](https://github.com/Ruth-Mwangi)
+
+## Features
+* Scanning of items
+* Adding items to cart
+
+## Upcoming Features
+* Calculating total of Items
+* Checkout
+* Adding Checkout data to the Expense feature
+* Fix issue of scanning same item multiple times
 
 ## Getting Started
 
@@ -18,18 +28,14 @@ CheckMeOut is a a supermarket self checkout app that also doubles as a financial
 
 ## Technologies Used
 * Java
+## Apis Used
+* [Mobile vision api](https://developers.google.com/vision/android/barcodes-overview) for the scanning of barcodes.
+* [checkmeout-api](https://checkmeout-api.herokuapp.com/) used to retrieve items using barcodes
 
 
 ## Support and contact details
-If you come across any problems you can reach me at: rwmwangi96@gmail.com
+If you come across any problems you can reach me at rwmwwangi96@gmail.com or use these resources:
+* [Mobile vision api](https://developers.google.com/vision/android/barcodes-overview)
 
-### License
-*This project is licensed under the terms of the MIT license.*
-Copyright (c) 2020 **Ruth Mwangi**
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+
