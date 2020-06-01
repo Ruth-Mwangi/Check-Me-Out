@@ -67,7 +67,7 @@ public class ShopFragmentAdapter extends RecyclerView.Adapter<ShopFragmentAdapte
             //Picasso.get().load(restaurant.getImageUrl()).into(mRestaurantImageView);
             viewBarcode.setText(good.getCode());
             viewName.setText(good.getName());
-            viewPrice.setText(good.getPrice());
+            viewPrice.setText(good.getPrice().toString());
         }
 
     }

@@ -18,26 +18,26 @@ public class CheckMeOutSearchResponse {
     private String name;
     @SerializedName("price")
     @Expose
-    private String price;
+    private Integer price;
     @SerializedName("id")
     @Expose
-    private String id;
+    private Integer id;
 
     /**
      * No args constructor for use in serialization
-     * 
+     *
      */
     public CheckMeOutSearchResponse() {
     }
 
     /**
-     * 
+     *
      * @param code
      * @param price
      * @param name
      * @param id
      */
-    public CheckMeOutSearchResponse(String code, String name, String price, String id) {
+    public CheckMeOutSearchResponse(String code, String name, Integer price, Integer id) {
         super();
         this.code = code;
         this.name = name;
@@ -61,19 +61,19 @@ public class CheckMeOutSearchResponse {
         this.name = name;
     }
 
-    public String getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
