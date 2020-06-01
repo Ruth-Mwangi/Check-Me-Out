@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -39,6 +40,8 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     FloatingActionButton btnScan;
     @BindView(R.id.cartView)
     RecyclerView cartView;
+    @BindView(R.id.btnCheckOut)
+    Button btnCheckOut;
     private Class fragmentClass;
     private ShopFragmentAdapter mAdapter;
     private CheckMeOutSearchResponse bundle;
@@ -49,11 +52,9 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view=inflater.inflate(R.layout.fragment_shop, container, false);
         ButterKnife.bind(this,view);
-//        Snackbar.make(view, "bloop", Snackbar.LENGTH_SHORT)
-//                .setAction("Action", null).show();
         Bundle getCode=this.getArguments();
         if(getCode!=null){
             if(codes.size()==0){
@@ -88,7 +89,6 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
                             cartView.setLayoutManager(layoutManager);
                             cartView.setHasFixedSize(true);
 
-
                         }
                         else {
                             showUnsuccessfulMessage();
@@ -104,18 +104,13 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
 
             }
 
-
             showItems();
-
-
-
-
-
         }
 
 
 
         btnScan.setOnClickListener(this);
+        btnCheckOut.setOnClickListener(this);
 
 
         return view;
@@ -126,25 +121,20 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         cartView.setVisibility(View.VISIBLE);
     }
     private void showUnsuccessfulMessage() {
-//        mErrorTextView.setText("Something went wrong. Please try again later");
-//        mErrorTextView.setVisibility(View.VISIBLE);
-        Toast.makeText(getContext(),"unsuccessful",Toast.LENGTH_LONG).show();
+
+        Toast.makeText(getContext(),"The item scanned does not exist add it to the api provided in the ReadMe",Toast.LENGTH_LONG).show();
     }
 
-//    private void showRestaurants() {
-//        mRecyclerView.setVisibility(View.VISIBLE);
-//    }
     private void showFailureMessage() {
-//        mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
-//        mErrorTextView.setVisibility(View.VISIBLE);
-        Toast.makeText(getContext(),"failure",Toast.LENGTH_LONG).show();
+
+        Toast.makeText(getContext(),"Check internet Connection",Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onClick(View v) {
 
         if(v==btnScan){
-//
+
             fragmentClass=ScanningFragment.class;
             try {
                 fragment = (Fragment) fragmentClass.newInstance();
@@ -156,7 +146,9 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
-
+        }
+        else if(v==btnCheckOut){
+            Toast.makeText(getContext(),"Coming Soon",Toast.LENGTH_LONG).show();
         }
 
     }
