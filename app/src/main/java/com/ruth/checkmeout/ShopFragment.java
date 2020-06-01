@@ -40,12 +40,12 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.btnScan)
     FloatingActionButton btnScan;
-    @BindView(R.id.surfaceView)
-    SurfaceView surfaceView;
-    private static final int REQUEST_CAMERA_PERMISSION = 201;
-    CameraSource cameraSource;
-    @BindView(R.id.txtBarcodeValue)
-    TextView txtBarcodeValue;
+//    @BindView(R.id.surfaceView)
+//    SurfaceView surfaceView;
+//    private static final int REQUEST_CAMERA_PERMISSION = 201;
+//    CameraSource cameraSource;
+//    @BindView(R.id.txtBarcodeValue)
+//    TextView txtBarcodeValue;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,7 +57,7 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
                         .setAction("Action", null).show();
         btnScan.setOnClickListener(this);
 
-        initialiseDetectorsAndSources();
+        //initialiseDetectorsAndSources();
         return view;
     }
 
@@ -90,100 +90,6 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         }
 
     }
-    private void initialiseDetectorsAndSources() {
 
-        Toast.makeText(getContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
-
-        BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(getContext())
-                .setBarcodeFormats(Barcode.ALL_FORMATS)
-                .build();
-
-        cameraSource = new CameraSource.Builder(getContext(), barcodeDetector)
-                .setRequestedPreviewSize(1920, 1080)
-                .setAutoFocusEnabled(true) //you should add this feature
-                .build();
-
-        surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
-            @Override
-            public void surfaceCreated(SurfaceHolder holder) {
-                try {
-                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                        cameraSource.start(surfaceView.getHolder());
-                        Log.i(TAG, "surfaceCreated: bloop");
-                        Toast.makeText(getContext(), "Surface created", Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        ActivityCompat.requestPermissions(getActivity(), new
-                                String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-
-            @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-                Log.i(TAG, "surfaceCreated: blipp");
-                Toast.makeText(getContext(), "Surface Changed", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void surfaceDestroyed(SurfaceHolder holder) {
-                Log.i(TAG, "surfaceCreated: bleep");
-                Toast.makeText(getContext(), "Surface  Destroyed", Toast.LENGTH_SHORT).show();
-                cameraSource.stop();
-            }
-        });
-
-
-        barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
-            @Override
-            public void release() {
-                Log.i(TAG, "surfaceCreated: bluup");
-                Toast.makeText(getContext(), "To prevent memory leaks barcode scanner has been stopped", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void receiveDetections(Detector.Detections<Barcode> detections) {
-                final SparseArray<Barcode> barcodes = detections.getDetectedItems();
-                //Toast.makeText(getContext(), barcodes.valueAt(0).rawValue,Toast.LENGTH_SHORT).show();
-
-                if (barcodes.size() != 0) {
-                    Log.i(TAG, "surfaceCreated:"+barcodes.size());
-//                    Toast.makeText(getContext(), barcodes.valueAt(0).rawValue,Toast.LENGTH_LONG).show();
-
-
-                    txtBarcodeValue.post(new Runnable() {
-
-                        @Override
-                        public void run() {
-
-                            String intentData;
-                            if (barcodes.valueAt(0).email != null) {
-                                txtBarcodeValue.removeCallbacks(null);
-                                intentData = barcodes.valueAt(0).email.address;
-
-                                txtBarcodeValue.setText(intentData);
-                                //isEmail = true;
-                                //btnAction.setText("ADD CONTENT TO THE MAIL");
-                                cameraSource.stop();
-
-                            } else {
-                                //isEmail = false;
-                                //btnAction.setText("LAUNCH URL");
-                                intentData = barcodes.valueAt(0).displayValue;
-                                txtBarcodeValue.setText(intentData);
-
-                            }
-                        }
-                    });
-
-                }
-            }
-        });
-    }
 
 }

@@ -6,9 +6,35 @@
     tools:context=".ScanningFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#009688">
+
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/txtBarcodeValue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Scanned code" />
+
+        <Button
+            android:id="@+id/btnGoToCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/txtBarcodeValue"
+            android:layout_gravity="start"
+            android:background="#FFFFFF"
+            android:fontFamily="@font/bentham"
+            android:text="Checkout"
+            android:textColor="#009688" />
+    </RelativeLayout>
 
 </FrameLayout>
