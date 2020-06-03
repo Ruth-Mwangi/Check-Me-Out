@@ -15,6 +15,7 @@ CheckMeOut is a a supermarket self checkout app that also doubles as a financial
 * Adding Checkout data to the Expense feature
 * Fix issue of scanning same item multiple times
 * Maintain data in recyclerview when switching of view occurs and reset recyclerview after checkout
+* drawing a rectangle around the barcode when detected
 
 ## Getting Started
 
