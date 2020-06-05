@@ -1,5 +1,6 @@
 package com.ruth.checkmeout.ui;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.ruth.checkmeout.R;
 import com.ruth.checkmeout.models.CheckMeOutSearchResponse;
 import com.ruth.checkmeout.networks.CheckMeOutApi;
@@ -36,6 +38,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     EditText signUpPassword;
     @BindView(R.id.signUpbutton)
     Button signUpButton;
+    private FirebaseAuth mAuth;
+    private ProgressDialog mAuthProgressDialog;
+    private String mName;
 
     @Nullable
     @Override
@@ -43,9 +48,24 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
         View view=inflater.inflate(R.layout.activity_sign_up,container,false);
 
         ButterKnife.bind(this,view);
+        mAuth=FirebaseAuth.getInstance();
         signUpButton.setOnClickListener(this);
+        createAuthStateListener();
+        createAuthProcessDialog();
+
+
 
         return view;
+    }
+
+    private void createAuthStateListener() {
+    }
+
+    private void createAuthProcessDialog() {
+        mAuthProgressDialog=new ProgressDialog(getContext());
+        mAuthProgressDialog.setTitle("Loading...");
+        mAuthProgressDialog.setMessage("Authenticating user");
+        mAuthProgressDialog.setCancelable(false);
     }
 
     @Override

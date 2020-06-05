@@ -49,6 +49,7 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     private ArrayList<String> codes=new ArrayList<>();
     private List<CheckMeOutSearchResponse> items=new ArrayList<>();
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
