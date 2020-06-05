@@ -1,6 +1,7 @@
 package com.ruth.checkmeout.ui;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.ruth.checkmeout.R;
 
 import butterknife.BindView;
@@ -59,6 +61,19 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
     }
 
     private void createAuthStateListener() {
+        mAuthListener=new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user=firebaseAuth.getCurrentUser();
+                        if(user!=null){
+                            Intent intent = new Intent(getContext(), MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            getActivity().finish();
+
+                        }
+            }
+        };
     }
 
     private void createAuthProgressDialog() {
