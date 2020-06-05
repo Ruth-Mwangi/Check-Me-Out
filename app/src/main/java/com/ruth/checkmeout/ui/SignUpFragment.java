@@ -150,5 +150,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     }
 
     private boolean isValidName(String name) {
+        if (name.equals("")) {
+            signUpName.setError("Please enter your name");
+            return false;
+        }
+        return true;
     }
 }
