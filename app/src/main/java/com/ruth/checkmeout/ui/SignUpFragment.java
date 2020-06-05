@@ -50,7 +50,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     Button signUpButton;
     @BindView(R.id.txtGoToLogin)
     TextView txtGoToLogin;
-    @BindView(R.id.signUpConfirmPassword) EditText signUpConfirmPassword;
+    @BindView(R.id.signUpConfirmPassword)
+    EditText signUpConfirmPassword;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
     private ProgressDialog mAuthProgressDialog;
@@ -68,6 +69,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
         signUpButton.setOnClickListener(this);
         createAuthStateListener();
         createAuthProcessDialog();
+        txtGoToLogin.setOnClickListener(this);
 
         return view;
     }
@@ -92,7 +94,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     private void createAuthProcessDialog() {
         mAuthProgressDialog=new ProgressDialog(getContext());
         mAuthProgressDialog.setTitle("Loading...");
-        mAuthProgressDialog.setMessage("Authenticating user");
+        mAuthProgressDialog.setMessage("Authenticating with Firebase...");
         mAuthProgressDialog.setCancelable(false);
     }
 
@@ -120,8 +122,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
         final String name=signUpName.getText().toString().trim();
         final String email=signUpEmail.getText().toString().trim();
         mName= signUpName.getText().toString().trim();
-        String password=signUpPassword.toString().trim();
-        String confirmPassword=signUpConfirmPassword.toString().trim();
+        String password=signUpPassword.getText().toString().trim();
+        String confirmPassword=signUpConfirmPassword.getText().toString().trim();
         boolean validName=isValidName(name);
         boolean validEmail=isValidEmail(email);
         boolean validPassword=isValidPassword(password,confirmPassword);
@@ -173,6 +175,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
             return false;
         } else if (!password.equals(confirmPassword)) {
             signUpPassword.setError("Passwords do not match");
+            signUpConfirmPassword.setError("Passwords do not match");
             return false;
         }
         return true;
