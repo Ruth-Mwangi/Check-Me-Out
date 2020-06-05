@@ -41,7 +41,6 @@ public class MyAccountFragment extends Fragment {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Toast.makeText(getContext(),user.getDisplayName(),Toast.LENGTH_SHORT).show();
                     profileName.setText(user.getDisplayName());
                     profileEmail.setText(user.getEmail());
 

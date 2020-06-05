@@ -7,10 +7,9 @@
     >
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="@color/design_default_color_secondary_variant"
         android:orientation="vertical">
         <!-- Email Label -->
@@ -31,32 +30,49 @@
             android:id="@+id/logInEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="50dp"
+            android:layout_marginRight="30dp"
+            android:background="#FFFFFF"
             android:ems="10"
             android:hint="Name"
             android:inputType="textEmailAddress"
-            android:textSize="18sp" />
+            android:textColorHint="#009688"
+            android:textSize="20dp"
+            android:typeface="monospace" />
 
         <EditText
             android:id="@+id/logInPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:background="#FFFFFF"
             android:ems="10"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColorHint="#009688"
+            android:textSize="20dp"
+            android:typeface="monospace" />
 
         <Button
             android:id="@+id/logInButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="Log in" />
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:background="#FFFFFF"
+            android:fontFamily="@font/bentham"
+            android:text="Log in"
+            android:textColor="#009688" />
 
         <TextView
             android:id="@+id/link_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="24dp"
             android:clickable="true"
             android:gravity="center"

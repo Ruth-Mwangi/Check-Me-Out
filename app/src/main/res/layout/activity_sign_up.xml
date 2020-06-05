@@ -94,6 +94,7 @@
             android:layout_marginRight="30dp"
             android:background="#FFFFFF"
             android:fontFamily="@font/bentham"
+            android:gravity="center"
             android:text="Sign Up"
             android:textColor="#009688"
             android:textStyle="bold" />
@@ -109,7 +110,7 @@
             android:fontFamily="@font/bentham"
             android:gravity="center"
             android:text="Already have an account? Log in here."
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textColorHint="#009688" />
 
 
