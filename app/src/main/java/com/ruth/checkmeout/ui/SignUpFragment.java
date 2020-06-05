@@ -2,6 +2,7 @@ package com.ruth.checkmeout.ui;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,6 +129,12 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     }
 
     private boolean isValidEmail(String email) {
+        boolean isGoodEmail=email!=null&& Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        if(!isGoodEmail){
+            signUpEmail.setError("Please enter a valid email address");
+            return false;
+        }
+        return true;
     }
 
     private boolean isValidPassword(String password, String confirmPassword) {
