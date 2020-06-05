@@ -2,6 +2,7 @@ package com.ruth.checkmeout.ui;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.ruth.checkmeout.R;
 import com.ruth.checkmeout.models.CheckMeOutSearchResponse;
 import com.ruth.checkmeout.networks.CheckMeOutApi;
@@ -52,6 +54,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     private FirebaseAuth mAuth;
     private ProgressDialog mAuthProgressDialog;
     private String mName;
+    private String TAG;
 
 
     @Nullable
@@ -126,6 +129,18 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     }
 
     private void createFirebaseUserProfile(FirebaseUser user) {
+        UserProfileChangeRequest addProfileName=new UserProfileChangeRequest.Builder()
+                .setDisplayName(mName)
+                .build();
+        user.updateProfile(addProfileName)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Log.d(TAG, user.getDisplayName());
+                        }
+                    }
+                });
     }
 
     private boolean isValidEmail(String email) {
