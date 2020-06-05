@@ -168,12 +168,11 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     }
 
     private boolean isValidPassword(String password, String confirmPassword) {
-        if(password.length()<6){
-            signUpPassword.setError("Password must be at least 6 characters long");
+        if (password.length() < 6) {
+            signUpPassword.setError("Please create a password containing at least 6 characters");
             return false;
-        }else if(!password.equals(confirmPassword)){
+        } else if (!password.equals(confirmPassword)) {
             signUpPassword.setError("Passwords do not match");
-            signUpConfirmPassword.setError("Passwords do not match");
             return false;
         }
         return true;

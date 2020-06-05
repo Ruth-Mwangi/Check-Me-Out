@@ -26,18 +26,10 @@ public class MyAccountFragment extends Fragment {
     @BindView(R.id.profileEmail) TextView profileEmail;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    @Nullable
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.activity_my_account,container,false);
-        ButterKnife.bind(this,view);
-//        Bundle bundle = this.getArguments();
-//        if(bundle!=null){
-//            profileName.setText(bundle.getString("name"));
-//            profileEmail.setText(bundle.getString("email"));
-//
-//
-//        }
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mAuth=FirebaseAuth.getInstance();
         mAuthListener=new FirebaseAuth.AuthStateListener() {
             @Override
@@ -50,6 +42,21 @@ public class MyAccountFragment extends Fragment {
                 }
             }
         };
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.activity_my_account,container,false);
+        ButterKnife.bind(this,view);
+//        Bundle bundle = this.getArguments();
+//        if(bundle!=null){
+//            profileName.setText(bundle.getString("name"));
+//            profileEmail.setText(bundle.getString("email"));
+//
+//
+//        }
+
 
         return view;
     }
