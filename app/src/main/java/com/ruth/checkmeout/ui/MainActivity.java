@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int id=item.getItemId();
                 if(id==R.id.home||id==R.id.about){
 
-//                    Intent intent=new Intent(getBaseContext(),MainActivity.class);
-//                    startActivity(intent);
                     Toast.makeText(MainActivity.this, "Coming Soon",Toast.LENGTH_SHORT).show();
 
 

@@ -1,5 +1,6 @@
 package com.ruth.checkmeout.ui;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.ruth.checkmeout.R;
 
 import butterknife.BindView;
@@ -37,6 +39,9 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.logInEmail)
     EditText logInEmail;
     @BindView(R.id.logInPassword) EditText logInPassword;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth mAuth;
+    private ProgressDialog mAuthProgressDialog;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -92,5 +97,10 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
 
         }
 
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
     }
 }
