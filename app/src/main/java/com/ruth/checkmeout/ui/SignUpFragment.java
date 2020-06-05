@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,9 +39,13 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     EditText signUpPassword;
     @BindView(R.id.signUpbutton)
     Button signUpButton;
+    @BindView(R.id.txtGoToLogin)
+    TextView txtGoToLogin;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
     private ProgressDialog mAuthProgressDialog;
     private String mName;
+
 
     @Nullable
     @Override
