@@ -50,19 +50,22 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
 
         link_signup.setOnClickListener(this);
         logInButton.setOnClickListener(this);
+        mAuth=FirebaseAuth.getInstance();
+        createAuthProgressDialog();
+        createAuthStateListener();
 
-        Bundle bundle = this.getArguments();
-        if(bundle!=null){
-            email = bundle.getString("email");
-            name = bundle.getString("name");
-            password = bundle.getString("password");
-            logInEmail.setText(email);
-            logInPassword.setText(password);
-
-        }
-        //Log.i(TAG, "onCreateView: "+ email);
 
         return view;
+    }
+
+    private void createAuthStateListener() {
+    }
+
+    private void createAuthProgressDialog() {
+        mAuthProgressDialog = new ProgressDialog(getContext());
+        mAuthProgressDialog.setTitle("Loading...");
+        mAuthProgressDialog.setMessage("Authenticating with Firebase...");
+        mAuthProgressDialog.setCancelable(false);
     }
 
     @Override
@@ -80,24 +83,14 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
 
         }
         else if(v==logInButton){
-            Bundle bundle = new Bundle();
-            email=logInEmail.getText().toString();
-            password=logInPassword.getText().toString();
-            bundle.putString("name",email);
-            bundle.putString("email",email);
-            fragmentClass=MyAccountFragment.class;
-            try {
-                fragment = (Fragment) fragmentClass.newInstance();
-                fragment.setArguments(bundle);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-
+            loginWithPassword();
         }
 
     }
+
+    private void loginWithPassword() {
+    }
+
     @Override
     public void onStart() {
         super.onStart();
