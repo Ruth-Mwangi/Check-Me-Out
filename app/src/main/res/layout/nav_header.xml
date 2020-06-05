@@ -12,12 +12,4 @@
         android:layout_marginBottom="15dp"
         android:background="@drawable/ic_person_black_24dp" />
 
-    <TextView
-        android:id="@+id/profileHeadName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:fontFamily="sans-serif-black"
-        android:text="LogIn" />
-
 </LinearLayout>

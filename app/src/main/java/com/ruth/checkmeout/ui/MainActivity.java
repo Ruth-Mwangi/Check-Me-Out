@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.ruth.checkmeout.R;
 
 import butterknife.BindView;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @BindView(R.id.txtGoToScan)
     TextView txtGoToScan;
+
 
 
     @Override
@@ -137,4 +140,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
 }
