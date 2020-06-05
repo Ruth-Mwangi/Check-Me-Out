@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/design_default_color_secondary_variant"
@@ -26,44 +25,91 @@
             android:id="@+id/signUpName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="50dp"
+            android:layout_marginRight="30dp"
+            android:background="#FFFFFF"
             android:ems="10"
+            android:fontFamily="@font/bentham"
             android:hint="Name"
             android:inputType="textPersonName"
-            android:textSize="18sp" />
+            android:textColorHint="#009688"
+            android:textSize="20dp"
+            android:typeface="monospace" />
 
         <EditText
             android:id="@+id/signUpEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:background="#FFFFFF"
             android:ems="10"
+            android:fontFamily="@font/bentham"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColorHint="#009688"
+            android:textSize="20dp"
+            android:typeface="monospace" />
 
         <EditText
             android:id="@+id/signUpPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:background="#FFFFFF"
             android:ems="10"
+            android:fontFamily="@font/bentham"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColorHint="#009688"
+            android:textSize="20dp"
+            android:typeface="monospace" />
+
         <EditText
             android:id="@+id/signUpConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:background="#FFFFFF"
             android:ems="10"
+            android:fontFamily="@font/bentham"
             android:hint="Confirm Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColorHint="#009688"
+            android:textSize="20dp"
+            android:typeface="monospace" />
 
         <Button
             android:id="@+id/signUpbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="50dp"
-            android:text="Sign Up" />
+            android:layout_marginRight="30dp"
+            android:background="#FFFFFF"
+            android:fontFamily="@font/bentham"
+            android:text="Sign Up"
+            android:textColor="#009688"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtGoToLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:fontFamily="@font/bentham"
+            android:gravity="center"
+            android:text="Already have an account? Log in here."
+            android:textColor="#FFFFFF"
+            android:textColorHint="#009688" />
 
 
     </LinearLayout>
