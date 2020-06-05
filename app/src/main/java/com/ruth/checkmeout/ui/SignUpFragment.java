@@ -186,4 +186,9 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
         }
         return true;
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
 }
