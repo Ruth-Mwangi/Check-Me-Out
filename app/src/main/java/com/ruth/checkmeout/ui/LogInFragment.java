@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +17,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ruth.checkmeout.R;
@@ -104,6 +108,29 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
     }
 
     private void loginWithPassword() {
+        String email=logInEmail.getText().toString().trim();
+        String password=logInPassword.getText().toString().trim();
+        if (email.equals("")) {
+            logInEmail.setError("Please enter your email");
+            return;
+        }
+        if (password.equals("")) {
+            logInPassword.setError("Password cannot be blank");
+            return;
+        }
+        mAuthProgressDialog.show();
+        mAuth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        mAuthProgressDialog.dismiss();
+                        if(!task.isSuccessful()){
+                            Toast.makeText(getContext(), "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
     }
 
     @Override
