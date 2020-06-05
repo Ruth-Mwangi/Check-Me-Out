@@ -1,6 +1,7 @@
 package com.ruth.checkmeout.ui;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -72,6 +73,20 @@ public class SignUpFragment extends Fragment implements View.OnClickListener{
     }
 
     private void createAuthStateListener() {
+        mAuthListener=new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                final FirebaseUser user=firebaseAuth.getCurrentUser();
+                if(user!= null){
+                    Intent intent=new Intent(getContext(),MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    getActivity().finish();
+
+                }
+
+            }
+        };
     }
 
     private void createAuthProcessDialog() {
