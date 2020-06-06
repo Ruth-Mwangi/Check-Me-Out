@@ -23,6 +23,7 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.ruth.checkmeout.R;
 
@@ -44,7 +45,8 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.txtBarcodeValue)
     TextView txtBarcodeValue;
     @BindView(R.id.btnGoToCart)
-    Button btnGoToCart;
+    FloatingActionButton btnGoToCart;
+    @BindView(R.id.btnAddItem) FloatingActionButton btnAddItem;
     private Class fragmentClass;
     private Fragment fragment = null;
     private String intentData="";
@@ -56,10 +58,13 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_scaning, container, false);
         ButterKnife.bind(this,view);
-        Snackbar.make(view, "Scan Items", Snackbar.LENGTH_SHORT)
+        Snackbar.make(view, "Click on + to add items", Snackbar.LENGTH_SHORT)
+                .setAction("Action", null).show();
+        Snackbar.make(view, "Click on the basket to checkout", Snackbar.LENGTH_SHORT)
                 .setAction("Action", null).show();
         btnGoToCart.setOnClickListener(this);
-        initialiseDetectorsAndSources();
+        btnAddItem.setOnClickListener(this);
+
         return view;
     }
 
@@ -83,6 +88,10 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
             FragmentManager fragmentManager = getFragmentManager();
             assert fragmentManager != null;
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+        }
+        if(v==btnAddItem){
+            initialiseDetectorsAndSources();
 
         }
 
@@ -140,15 +149,18 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
             @Override
             public void release() {
                 Log.i(TAG, "surfaceCreated: bluup");
-                Toast.makeText(getContext(), "To prevent memory leaks barcode scanner has been stopped", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "To prevent memory leaks barcode scanner has been stopped", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
+
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
                 //Toast.makeText(getContext(), barcodes.valueAt(0).rawValue,Toast.LENGTH_SHORT).show();
 
+
                 if (barcodes.size() != 0) {
+                    barcodeDetector.release();
                     Log.i(TAG, "surfaceCreated:"+barcodes.size());
 //                    Toast.makeText(getContext(), barcodes.valueAt(0).rawValue,Toast.LENGTH_LONG).show();
 
@@ -180,6 +192,8 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
                     });
 
                 }
+
+
             }
         });
     }

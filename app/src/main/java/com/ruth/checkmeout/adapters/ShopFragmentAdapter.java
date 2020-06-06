@@ -52,7 +52,7 @@ public class ShopFragmentAdapter extends RecyclerView.Adapter<ShopFragmentAdapte
 
 
 
-    public class ShopFragmentViewHolder extends RecyclerView.ViewHolder {
+    public class ShopFragmentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.viewBarcode)
         TextView viewBarcode;
         @BindView(R.id.viewName)
@@ -62,6 +62,7 @@ public class ShopFragmentAdapter extends RecyclerView.Adapter<ShopFragmentAdapte
         public ShopFragmentViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
         }
         public void bindGood(CheckMeOutSearchResponse good) {
             //Picasso.get().load(restaurant.getImageUrl()).into(mRestaurantImageView);
@@ -70,5 +71,11 @@ public class ShopFragmentAdapter extends RecyclerView.Adapter<ShopFragmentAdapte
             viewPrice.setText(good.getPrice().toString());
         }
 
+        @Override
+        public void onClick(View v) {
+            int currentPosition=getLayoutPosition();
+
+
+        }
     }
 }
