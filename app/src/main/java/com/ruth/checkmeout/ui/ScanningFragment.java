@@ -51,6 +51,7 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
     private Fragment fragment = null;
     private String intentData="";
     private ArrayList<String> itemCodes=new ArrayList<String>();
+    private boolean firstDetected=true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +65,7 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
                 .setAction("Action", null).show();
         btnGoToCart.setOnClickListener(this);
         btnAddItem.setOnClickListener(this);
+        initialiseDetectorsAndSources();
 
         return view;
     }
@@ -91,6 +93,7 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
 
         }
         if(v==btnAddItem){
+            firstDetected=true;
             initialiseDetectorsAndSources();
 
         }
@@ -159,8 +162,9 @@ public class ScanningFragment extends Fragment implements View.OnClickListener {
                 //Toast.makeText(getContext(), barcodes.valueAt(0).rawValue,Toast.LENGTH_SHORT).show();
 
 
-                if (barcodes.size() != 0) {
-                    barcodeDetector.release();
+                if (barcodes.size() != 0 && firstDetected) {
+                    //barcodeDetector.release();
+                    firstDetected=false;
                     Log.i(TAG, "surfaceCreated:"+barcodes.size());
 //                    Toast.makeText(getContext(), barcodes.valueAt(0).rawValue,Toast.LENGTH_LONG).show();
 

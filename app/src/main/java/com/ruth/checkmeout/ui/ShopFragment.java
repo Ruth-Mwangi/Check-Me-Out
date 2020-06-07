@@ -1,12 +1,6 @@
 package com.ruth.checkmeout.ui;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +8,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.ruth.checkmeout.R;
 import com.ruth.checkmeout.adapters.ShopFragmentAdapter;
 import com.ruth.checkmeout.models.CheckMeOutSearchResponse;
@@ -36,6 +34,7 @@ import static android.content.ContentValues.TAG;
 
 public class ShopFragment extends Fragment implements View.OnClickListener {
 
+
     @BindView(R.id.btnScan)
     FloatingActionButton btnScan;
     @BindView(R.id.cartView)
@@ -49,14 +48,15 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     private ArrayList<String> codes=new ArrayList<>();
     private List<CheckMeOutSearchResponse> items=new ArrayList<>();
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_shop, container, false);
         ButterKnife.bind(this,view);
+
         Bundle getCode=this.getArguments();
+        Log.i(TAG, "Code size : "+ codes.size());
         if(getCode!=null){
             if(codes.size()==0){
                 codes=getCode.getStringArrayList("codes");
@@ -67,6 +67,7 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
             }
 
         }
+        Log.i(TAG, "Code size : "+ codes.size());
         if(codes.size()>0){
             for(String code : codes){
                 CheckMeOutApi client= CheckMeOutClient.getItem();
@@ -106,6 +107,7 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
             }
 
             showItems();
+
         }
 
 
@@ -150,9 +152,12 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         }
         else if(v==btnCheckOut){
             Toast.makeText(getContext(),"Coming Soon",Toast.LENGTH_LONG).show();
+            addShoppingToFirebase();
         }
 
     }
 
+    private void addShoppingToFirebase() {
+    }
 
 }
