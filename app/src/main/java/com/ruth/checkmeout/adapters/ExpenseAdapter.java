@@ -1,5 +1,6 @@
 package com.ruth.checkmeout.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.ArrayAdapter;
 
@@ -18,12 +19,13 @@ public class ExpenseAdapter extends ArrayAdapter {
         //this.months = months;
         this.expenses = expenses;
     }
+    @SuppressLint("DefaultLocale")
     @Override
     public Object getItem(int position) {
         //String month=months[position];
         int expense=expenses.get(position).getTotal();
-        int month=expenses.get(position).getLocalDate().getMonth();
-        return String.format("%s \n %d KES",month,expense);
+        String date=expenses.get(position).getLocalDate().toString();
+        return String.format("%s \n %d KES",date,expense);
     }
     @Override
     public int getCount() {
