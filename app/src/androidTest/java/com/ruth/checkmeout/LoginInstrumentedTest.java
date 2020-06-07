@@ -6,7 +6,6 @@ import androidx.test.rule.ActivityTestRule;
 
 import com.ruth.checkmeout.ui.LogInFragment;
 import com.ruth.checkmeout.ui.MainActivity;
-import com.ruth.checkmeout.ui.MyAccountFragment;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,6 +14,7 @@ import org.junit.runner.RunWith;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
@@ -35,7 +35,7 @@ public class LoginInstrumentedTest {
     public void LogInInfoSentToMyAccount() {
         LogInFragment fragment=new LogInFragment();
         activityTestRule.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.flContent,fragment).commit();
-        onView(withId(R.id.logInEmail)).perform(typeText("rwmwangi96@gmail.com")).perform(closeSoftKeyboard());
+        onView(withId(R.id.logInEmail)).perform(replaceText("rwmwangi96@gmail.com")).perform(closeSoftKeyboard());
         onView(withId(R.id.logInPassword)).perform(typeText("Trinidad96")).perform(closeSoftKeyboard());
         try {                             // the sleep method requires to be checked and handled so we use try block
             Thread.sleep(250);
@@ -43,9 +43,6 @@ public class LoginInstrumentedTest {
             System.out.println("got interrupted!");
         }
         onView(withId(R.id.logInButton)).perform(click());
-
-        MyAccountFragment fragmentAccount=new MyAccountFragment();
-        activityTestRule.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.flContent,fragmentAccount).commit();
 
 
     }

@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
@@ -25,13 +24,5 @@ public class MainActivityInstrumentedTest {
         onView(withId(R.id.txtGoToScan)).perform(click());
     }
 
-    @Test
-    public void openDrawer() throws InterruptedException {
-        onView(withId(R.id.activity_main)).perform(click());
-        onView(withId(R.id.signInLink)).perform(click());
-        onView(withId(R.id.logInEmail)).perform(typeText("rwmwangi96@gmail.com"));
-        onView(withId(R.id.logInPassword)).perform(typeText("Trinidad96"));
-        onView(withId(R.id.logInButton)).perform(click());
 
-    }
 }
