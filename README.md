@@ -15,6 +15,7 @@ CheckMeOut is a a supermarket self checkout app that also doubles as a financial
 * Adding Checkout data to the Expense feature
 * Fix issue of scanning same item multiple times
 * Maintain data in recyclerview when switching of view occurs and reset recyclerview after checkout
+* drawing a rectangle around the barcode when detected
 
 ## Getting Started
 
@@ -23,7 +24,7 @@ CheckMeOut is a a supermarket self checkout app that also doubles as a financial
 * type git clone followed by the link you just copied
 * add appropriate dependencies
 * open the file and run the MainActivity.java class
-* Scan image if it is unsuccessful [click here to solve the issue](https://github.com/Ruth-Mwangi)<br />
+* If Scan image is unsuccessful [click here see Api Documentation](https://checkmeout-api.herokuapp.com/)<br />
  ![ScreenShot](https://user-images.githubusercontent.com/22973263/83427164-fabc7500-a438-11ea-8923-b98b2db838c4.jpg )
 
  ![ScreenShot](https://user-images.githubusercontent.com/22973263/83427178-0019bf80-a439-11ea-974b-a6ad1e45c93b.jpg)
@@ -40,6 +41,8 @@ CheckMeOut is a a supermarket self checkout app that also doubles as a financial
 * Java 
 * The libraries below were useful in the development of the application <br />
  ![image](https://user-images.githubusercontent.com/22973263/83426797-63572200-a438-11ea-806d-e374c8386669.png)
+ 
+ 
  
  
 ## Apis Used
