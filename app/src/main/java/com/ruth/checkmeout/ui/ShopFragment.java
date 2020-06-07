@@ -1,5 +1,7 @@
 package com.ruth.checkmeout.ui;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,15 +10,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.ruth.checkmeout.Constants;
 import com.ruth.checkmeout.R;
 import com.ruth.checkmeout.adapters.ShopFragmentAdapter;
 import com.ruth.checkmeout.models.CheckMeOutSearchResponse;
+import com.ruth.checkmeout.models.Expense;
 import com.ruth.checkmeout.networks.CheckMeOutApi;
 import com.ruth.checkmeout.networks.CheckMeOutClient;
 
@@ -32,6 +41,7 @@ import retrofit2.Response;
 import static android.content.ContentValues.TAG;
 
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class ShopFragment extends Fragment implements View.OnClickListener {
 
 
@@ -47,6 +57,8 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     private Fragment fragment = null;
     private ArrayList<String> codes=new ArrayList<>();
     private List<CheckMeOutSearchResponse> items=new ArrayList<>();
+    private int total=0;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -152,12 +164,25 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         }
         else if(v==btnCheckOut){
             Toast.makeText(getContext(),"Coming Soon",Toast.LENGTH_LONG).show();
-            addShoppingToFirebase();
+            for(int i=0;i<items.size();i++){
+                total=total+ items.get(i).getPrice();
+            }
+            Expense entry=new Expense(total);
+
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
+            DatabaseReference restaurantRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_EXPENSES).child(uid);;
+            restaurantRef.push().setValue(entry);
+            Toast.makeText(getContext(), "Complete", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            startActivity(intent);
+
         }
 
     }
 
-    private void addShoppingToFirebase() {
-    }
+
 
 }
