@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,25 +44,31 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener{
         View view =inflater.inflate(R.layout.activity_expenses,container,false);
         ButterKnife.bind(this,view);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EXPENSES).child(uid);
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    expenses.add(snapshot.getValue(Expense.class));
+        if(user!=null){
+            String uid = user.getUid();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EXPENSES).child(uid);
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        expenses.add(snapshot.getValue(Expense.class));
+                    }
+                    Log.i(TAG, "retrieved Number: "+ expenses.size());
+                    ExpenseAdapter adapter1=new ExpenseAdapter(view.getContext(),android.R.layout.simple_list_item_1,expenses);
+                    expenseList.setAdapter(adapter1);
+
                 }
-                Log.i(TAG, "retrieved Number: "+ expenses.size());
-                ExpenseAdapter adapter1=new ExpenseAdapter(view.getContext(),android.R.layout.simple_list_item_1,expenses);
-                expenseList.setAdapter(adapter1);
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
 
-            }
-        });
+        }else {
+            Toast.makeText(getContext(),"Make Sure you are logged in",Toast.LENGTH_LONG).show();
+        }
+
 
 
         return view;

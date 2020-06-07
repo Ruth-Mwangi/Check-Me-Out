@@ -170,14 +170,21 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
             Expense entry=new Expense(total);
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            String uid = user.getUid();
-            DatabaseReference restaurantRef = FirebaseDatabase
-                    .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_EXPENSES).child(uid);;
-            restaurantRef.push().setValue(entry);
-            Toast.makeText(getContext(), "Complete", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getContext(), MainActivity.class);
-            startActivity(intent);
+            if(user!=null){
+                String uid = user.getUid();
+                DatabaseReference restaurantRef = FirebaseDatabase
+                        .getInstance()
+                        .getReference(Constants.FIREBASE_CHILD_EXPENSES).child(uid);;
+                restaurantRef.push().setValue(entry);
+                Toast.makeText(getContext(), "Complete", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+
+            }
+            else {
+                Toast.makeText(getContext(),"Make sure you are logged in",Toast.LENGTH_LONG).show();
+            }
+
 
         }
 

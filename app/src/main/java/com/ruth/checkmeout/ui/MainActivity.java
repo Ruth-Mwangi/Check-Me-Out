@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.ruth.checkmeout.R;
 
 import butterknife.BindView;
@@ -78,6 +79,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         case R.id.signInLink:
                             Toast.makeText(MainActivity.this, "Log In",Toast.LENGTH_SHORT).show();
                             fragmentClass= LogInFragment.class;break;
+                        case R.id.signOutLink:
+                            Toast.makeText(MainActivity.this, "Sign Out",Toast.LENGTH_SHORT).show();
+                            FirebaseAuth.getInstance().signOut();
+                            fragmentClass= LogInFragment.class;
+                            break;
                         case R.id.shop:
                             Toast.makeText(MainActivity.this, "Shop",Toast.LENGTH_SHORT).show();
                             fragmentClass= ShopFragment.class;break;
