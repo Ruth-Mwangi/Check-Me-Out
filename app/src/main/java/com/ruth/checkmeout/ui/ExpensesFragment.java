@@ -10,8 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.ruth.checkmeout.Constants;
 import com.ruth.checkmeout.adapters.ExpenseAdapter;
 import com.ruth.checkmeout.R;
+import com.ruth.checkmeout.models.Expense;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,13 +31,30 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener{
     @BindView(R.id.expenseList)
     ListView expenseList;
 
-    private String[] months=new String[]{"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"};
-    private int[] expenses=new int[]{1000,1800,2000,3000,5000,1000,4990,1234,2000,1299,4267,7464};
+//    private String[] months=new String[]{"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"};
+//    private int[] expenses=new int[]{1000,1800,2000,3000,5000,1000,4990,1234,2000,1299,4267,7464};
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.activity_expenses,container,false);
         ButterKnife.bind(this,view);
-        ExpenseAdapter adapter1=new ExpenseAdapter(view.getContext(),android.R.layout.simple_list_item_1,months,expenses);
+        ArrayList<Expense> expenses = new ArrayList<>();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_EXPENSES).child(uid);
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    expenses.add(snapshot.getValue(Expense.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        ExpenseAdapter adapter1=new ExpenseAdapter(view.getContext(),android.R.layout.simple_list_item_1,expenses);
         expenseList.setAdapter(adapter1);
 
         return view;

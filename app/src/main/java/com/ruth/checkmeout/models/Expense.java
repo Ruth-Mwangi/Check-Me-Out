@@ -27,6 +27,9 @@ public class Expense {
         this.pushId = pushId;
     }
 
+    public Expense() {
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Expense(int total) {
         this.total = total;
