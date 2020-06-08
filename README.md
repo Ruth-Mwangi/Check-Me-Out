@@ -24,11 +24,19 @@ CheckMeOut is a a supermarket self checkout app that also doubles as a financial
 * type git clone followed by the link you just copied
 * add appropriate dependencies
 * open the file and run the MainActivity.java class
+* Click on the start shopping link
+* Scan items
 * If Scan image is unsuccessful [click here see Api Documentation](https://checkmeout-api.herokuapp.com/)<br />
 
-<img src="images/crayons.jpg" width="100"> 
-<img src="images/crisps.jpg" width="100">
-<img src="images/oil.jpg" width="100">
+<img src="images/crayons.jpg" width="200"> 
+<img src="images/crisps.jpg" width="200">
+<img src="images/Screenshot_20200608-070331_CheckMeOut.jpg" width="200">
+* Click on the basket icon when you are done <br />
+<img src="images/expenses.jpg" width="200">
+* Ensure all items scanned are on the list then proceed to click on the checkout button
+* You can view all expenses by clicking on the expenses option in the menu <br />
+<img src="images/Screenshot_20200608-070525_CheckMeOut.jpg" width="200">
+
  
 ### Prerequisites
 
