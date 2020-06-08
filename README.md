@@ -30,9 +30,9 @@ CheckMeOut is a a supermarket self checkout app that also doubles as a financial
 
 <img src="images/crayons.jpg" width="200"> 
 <img src="images/crisps.jpg" width="200">
-<img src="images/Screenshot_20200608-070331_CheckMeOut.jpg" width="200">
+<img src="images/Screenshot_20200608-070331_CheckMeOut.jpg" width="200"><br />
 * Click on the basket icon when you are done <br />
-<img src="images/expenses.jpg" width="200">
+<img src="images/expenses.jpg" width="200"><br />
 * Ensure all items scanned are on the list then proceed to click on the checkout button
 * You can view all expenses by clicking on the expenses option in the menu <br />
 <img src="images/Screenshot_20200608-070525_CheckMeOut.jpg" width="200">
@@ -47,7 +47,25 @@ CheckMeOut is a a supermarket self checkout app that also doubles as a financial
 * Java 
 * The libraries below were useful in the development of the application <br />
  ![image](https://user-images.githubusercontent.com/22973263/83426797-63572200-a438-11ea-806d-e374c8386669.png)
- 
+### Testing
+For testing i used the following libraries
+* androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+* androidTestImplementation 'androidx.test:rules:1.2.0'
+* androidTestImplementation 'androidx.test:runner:1.2.0'
+* androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+* testImplementation 'org.robolectric:robolectric:4.3.1'
+### Google vision
+* implementation 'com.google.android.gms:play-services-vision:20.0.0'
+### Firebase
+* implementation 'com.google.firebase:firebase-analytics:17.4.2'
+* implementation 'com.firebaseui:firebase-ui-database:3.3.1'
+* implementation 'com.google.firebase:firebase-core:17.4.2'
+* implementation 'com.google.firebase:firebase-database:19.3.0'
+* implementation 'com.google.firebase:firebase-auth:19.3.1'
+### Api
+* implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+* implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+
  
  
  
