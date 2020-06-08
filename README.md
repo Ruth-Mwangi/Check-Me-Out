@@ -25,12 +25,10 @@ CheckMeOut is a a supermarket self checkout app that also doubles as a financial
 * add appropriate dependencies
 * open the file and run the MainActivity.java class
 * If Scan image is unsuccessful [click here see Api Documentation](https://checkmeout-api.herokuapp.com/)<br />
- ![ScreenShot](https://user-images.githubusercontent.com/22973263/83427164-fabc7500-a438-11ea-8923-b98b2db838c4.jpg )
 
- ![ScreenShot](https://user-images.githubusercontent.com/22973263/83427178-0019bf80-a439-11ea-974b-a6ad1e45c93b.jpg)
- 
- ![ScreenShot](https://user-images.githubusercontent.com/22973263/83427187-0445dd00-a439-11ea-8ed5-a689e45abd43.jpg)
- 
+<img src="images/crayons.jpg" width="100"> 
+<img src="images/crisps.jpg" width="100">
+<img src="images/oil.jpg" width="100">
  
 ### Prerequisites
 
